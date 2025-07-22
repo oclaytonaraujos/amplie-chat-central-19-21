@@ -38,13 +38,13 @@ interface CreationStep {
 const CREATION_STEPS: CreationStep[] = [
   {
     id: 'form',
-    title: 'Configurar Instância',
-    description: 'Preencha os dados da sua instância WhatsApp'
+    title: 'Nova Conexão WhatsApp',
+    description: 'Configure sua nova conexão WhatsApp'
   },
   {
     id: 'creating',
-    title: 'Criando Instância',
-    description: 'Criando instância no Evolution API...'
+    title: 'Criando Conexão',
+    description: 'Estabelecendo conexão com WhatsApp...'
   },
   {
     id: 'qrcode',
@@ -54,7 +54,7 @@ const CREATION_STEPS: CreationStep[] = [
   {
     id: 'success',
     title: 'Sucesso!',
-    description: 'Instância criada e conectada com sucesso'
+    description: 'Conexão WhatsApp criada com sucesso'
   }
 ];
 
@@ -209,7 +209,7 @@ export function CreateInstanceDialog({ open, onOpenChange, onInstanceCreated }: 
         return (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <Label htmlFor="instanceName">Nome da Instância</Label>
+              <Label htmlFor="instanceName">Nome da Conexão</Label>
               <Input
                 id="instanceName"
                 value={formData.instanceName}
@@ -228,7 +228,7 @@ export function CreateInstanceDialog({ open, onOpenChange, onInstanceCreated }: 
                 id="description"
                 value={formData.description}
                 onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-                placeholder="Descrição da instância WhatsApp"
+                placeholder="Descrição da conexão WhatsApp"
                 rows={2}
               />
             </div>
@@ -251,7 +251,7 @@ export function CreateInstanceDialog({ open, onOpenChange, onInstanceCreated }: 
               <Alert variant="destructive">
                 <AlertCircle className="h-4 w-4" />
                 <AlertDescription>
-                  Configuração global Evolution API não encontrada. Configure primeiro no painel administrativo.
+                  Configuração WhatsApp não encontrada. Configure primeiro no painel administrativo.
                 </AlertDescription>
               </Alert>
             )}
@@ -269,7 +269,7 @@ export function CreateInstanceDialog({ open, onOpenChange, onInstanceCreated }: 
         return (
           <div className="text-center py-8">
             <Loader2 className="w-16 h-16 animate-spin mx-auto mb-4 text-primary" />
-            <p className="text-lg">Criando sua instância WhatsApp...</p>
+            <p className="text-lg">Criando sua conexão WhatsApp...</p>
             <p className="text-sm text-muted-foreground">Isso pode levar alguns momentos</p>
           </div>
         );
@@ -317,7 +317,7 @@ export function CreateInstanceDialog({ open, onOpenChange, onInstanceCreated }: 
             <CheckCircle className="w-16 h-16 mx-auto mb-4 text-green-500" />
             <h3 className="text-lg font-semibold mb-2">Conexão estabelecida!</h3>
             <p className="text-muted-foreground">
-              Sua instância WhatsApp foi criada e conectada com sucesso.
+              Sua conexão WhatsApp foi criada e conectada com sucesso.
             </p>
           </div>
         );
@@ -360,7 +360,7 @@ export function CreateInstanceDialog({ open, onOpenChange, onInstanceCreated }: 
                   Criando...
                 </>
               ) : (
-                'Criar Instância'
+                'Criar Conexão'
               )}
             </Button>
           </DialogFooter>
