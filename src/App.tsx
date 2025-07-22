@@ -7,15 +7,15 @@ import { lazy, Suspense, useEffect, startTransition } from "react";
 
 // Core providers (loaded immediately)
 import { ThemeProvider } from "@/hooks/useTheme";
+import { AuthProvider } from "@/hooks/useAuth";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { queryClient } from "@/config/queryClient";
 import { OptimizedLoading } from "@/components/ui/optimized-loading";
 import { setupGlobalErrorHandling } from "@/utils/production-logger";
 
 // Lazy load providers
-const AuthProvider = lazy(() => import("@/hooks/useAuth").then(m => ({ default: m.AuthProvider })));
 const AdminAuthProvider = lazy(() => import("@/hooks/useAdminAuth").then(m => ({ default: m.AdminAuthProvider })));
 const ErrorBoundary = lazy(() => import("@/components/ErrorBoundary").then(m => ({ default: m.ErrorBoundary })));
-const ProtectedRoute = lazy(() => import("@/components/ProtectedRoute").then(m => ({ default: m.ProtectedRoute })));
 const Layout = lazy(() => import("@/components/layout/Layout").then(m => ({ default: m.Layout })));
 
 // Lazy Loading de Páginas
@@ -311,8 +311,8 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <Suspense fallback={<MinimalFallback />}>
-          <AuthProvider>
+        <AuthProvider>
+          <Suspense fallback={<MinimalFallback />}>
             <AdminAuthProvider>
               <TooltipProvider>
                 <Toaster />
@@ -321,8 +321,8 @@ const App = () => {
                 </BrowserRouter>
               </TooltipProvider>
             </AdminAuthProvider>
-          </AuthProvider>
-        </Suspense>
+          </Suspense>
+        </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );
